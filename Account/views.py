@@ -22,6 +22,11 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = RegisterSerializer
 
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     return qs.filter(owner=self.request.user)
+    
+
 @api_view(["PATCH"])
 @permission_classes([permissions.IsAuthenticated])
 def UpdateProfile(request):
