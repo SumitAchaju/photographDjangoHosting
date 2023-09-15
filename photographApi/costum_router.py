@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path,re_path
 from Follow.views import UserFriend,FriendPosts,UserFollowFollowing,FriendSuggestion,AddFriend,RemoveFriend
 from Account.views import RegisterView,UpdateProfile,ChangePassword
 from Post.views import PostCategory,SinglePost,AddComment,DeleteComment,PostLikes,PostLikesOut,UserPost,UploadPost,UpdatePost,DeletePost,PostSaved
 from More.views import Feedback,ImproveSugg
+from chat.views import ChatMessage,LatestMessage,msg_seen,UnSeenMsg
 
 
 urlpatterns = [
@@ -28,4 +29,8 @@ urlpatterns = [
     path("savedpost/",PostSaved),
     path("improvesuggestion/",ImproveSugg),
     path("feedback/",Feedback),
+    re_path(r"chatmessage/(?P<friend_id>\w+)/$",ChatMessage.as_view()),
+    re_path(r"latest_message/",LatestMessage.as_view()),
+    path("message_seen/<msg_id>",msg_seen),
+    path("unseen_msg/",UnSeenMsg.as_view()),
 ]

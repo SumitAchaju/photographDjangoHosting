@@ -8,6 +8,7 @@ class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
     skill = models.CharField(max_length=100,null=True,blank=True)
     name = models.CharField(max_length=100,null=True,blank=True)
+    active_status = models.BooleanField(default=False)
 
     def save(self,*args, **kwargs):
         super().save(*args, **kwargs)

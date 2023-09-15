@@ -7,7 +7,6 @@ from Post.serializers import PostSerializer
 from Post.models import Post
 from Account.models import User
 from Account.serializers import UserSerializer
-from django.db.models import Q
 
 class AllFriendsViewSet(viewsets.ModelViewSet):
     queryset = Friend.objects.all().order_by('-id')

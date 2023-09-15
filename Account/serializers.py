@@ -5,7 +5,7 @@ from Follow.models import Friend
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id","username","first_name","last_name","profile_image","bio","date_of_birth","email","skill"]
+        fields = ["id","username","first_name","last_name","profile_image","bio","date_of_birth","email","skill","active_status"]
 
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
