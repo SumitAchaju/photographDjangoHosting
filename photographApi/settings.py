@@ -35,18 +35,6 @@ if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
-# Application definition
-
-ASGI_APPLICATION = "photographApi.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("redis://SumitAchaju:8k9_XZFur.DiDUc@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
-        }
-    },
-}
-
 INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
@@ -135,6 +123,16 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "photographApi.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis://SumitAchaju:8k9_XZFur.DiDUc@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
+        }
+    },
+}
+
 WSGI_APPLICATION = 'photographApi.wsgi.application'
 
 
@@ -185,6 +183,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static/'
+# Following settings only make sense on production and may break development environments.
+if not DEBUG:
+    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
