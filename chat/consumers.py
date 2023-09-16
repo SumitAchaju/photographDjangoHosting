@@ -39,7 +39,6 @@ class ChatMessage(AsyncWebsocketConsumer):
 
     # Receive message from WebSocket
     async def receive(self, text_data):
-        print(text_data)
         text_data_json = json.loads(text_data)
         if "seen" in text_data_json:
             await self.msg_seen(text_data_json['msgId'])

@@ -45,7 +45,6 @@ class JwtAuthMiddleware(BaseMiddleware):
             UntypedToken(token)
         except (InvalidToken, TokenError) as e:
             # Token is invalid
-            print(e)
             return None
         else:
             #  Then token is valid, decode it
