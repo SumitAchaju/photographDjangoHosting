@@ -28,7 +28,7 @@ class ChatMessage(ListAPIView):
     def list(self, request, *args, **kwargs):
         messages = self.get_queryset()
         for msg in messages:
-            if msg.send_user.id != request.user.id:
+            if msg.send_user.id != request.user.id and msg.msg_status != 'seen':
                 msg.msg_status = 'seen'
                 msg.save()
                 channel = get_channel_layer()
