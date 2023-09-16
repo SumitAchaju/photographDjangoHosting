@@ -26,7 +26,8 @@ from datetime import timedelta
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+# DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -132,7 +133,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis://SumitAchaju:8k9_XZFur.DiDUc@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
+            "hosts": [("redis://red-ck2parr6fquc73e8l4ig:6379")],
         }
     },
 }
