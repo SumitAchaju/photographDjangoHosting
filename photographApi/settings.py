@@ -35,18 +35,6 @@ if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
-# Application definition
-
-ASGI_APPLICATION = "photographApi.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("redis://SumitAchaju:8k9_XZFur.DiDUc@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
-        }
-    },
-}
-
 INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
@@ -135,6 +123,17 @@ TEMPLATES = [
     },
 ]
 
+# Application definition
+
+ASGI_APPLICATION = "photographApi.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis://SumitAchaju:8k9_XZFur.DiDUc@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
+        }
+    },
+}
 WSGI_APPLICATION = 'photographApi.wsgi.application'
 
 
