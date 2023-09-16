@@ -34,6 +34,15 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
+ASGI_APPLICATION = "photographApi.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1",6379)],
+        }
+    },
+}
 
 INSTALLED_APPS = [
     'daphne',
@@ -122,16 +131,6 @@ TEMPLATES = [
         },
     },
 ]
-
-ASGI_APPLICATION = "photographApi.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("redis://SumitAchaju:8k9_XZFur.DiDUc@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
-        }
-    },
-}
 
 WSGI_APPLICATION = 'photographApi.wsgi.application'
 
