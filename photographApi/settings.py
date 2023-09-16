@@ -40,7 +40,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [('redis://vGphoEr4tgofBk2idTg8EmnOlm3Kfxy0@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154')],
+            "hosts": [('redis://:vGphoEr4tgofBk2idTg8EmnOlm3Kfxy0@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154')],
         }
     },
 }
