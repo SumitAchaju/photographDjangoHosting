@@ -35,7 +35,6 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 INSTALLED_APPS = [
     'daphne',
@@ -133,7 +132,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis://red-ck2parr6fquc73e8l4ig:6379")],
+            "hosts": [("redis://SumitAchaju:b6074fae4a9570a4f771ede2201c9de8a91b6610739b0541287442b4e52f6130@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154")],
         }
     },
 }
