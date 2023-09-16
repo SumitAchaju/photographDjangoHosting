@@ -16,7 +16,7 @@ from channels.security.websocket import AllowedHostsOriginValidator
 
 from chat import routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'photographApi.settings')
+DJANGO_SETTINGS_MODULE = os.environ.get('DJANGO_SETTINGS_MODULE')
 
 django_asgi_app = get_asgi_application()
 
