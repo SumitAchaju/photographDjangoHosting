@@ -10,13 +10,13 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/
 import os
 
 from django.core.asgi import get_asgi_application
-from chat.authmiddleware import JwtAuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 
-from chat import routing
+os.environ.get('DJANGO_SETTINGS_MODULE', 'photographApi.settings')
 
-DJANGO_SETTINGS_MODULE = os.environ.get('DJANGO_SETTINGS_MODULE')
+from chat.authmiddleware import JwtAuthMiddlewareStack
+from chat import routing
 
 django_asgi_app = get_asgi_application()
 
