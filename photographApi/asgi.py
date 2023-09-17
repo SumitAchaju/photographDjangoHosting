@@ -21,7 +21,8 @@ from chat.authmiddleware import JwtAuthMiddlewareStack
 from chat import routing
 
 application = ProtocolTypeRouter({
-    "http": django_asgi_app,
+    "http":django_asgi_app,
+    "https": django_asgi_app,
     "websocket": AllowedHostsOriginValidator(
         JwtAuthMiddlewareStack(URLRouter(routing.websocket_urlpatterns))
     ), 
