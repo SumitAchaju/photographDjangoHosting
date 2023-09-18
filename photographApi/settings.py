@@ -30,21 +30,7 @@ DEBUG = os.environ.get('DEBUG',default=False)
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
-# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-# if RENDER_EXTERNAL_HOSTNAME:
-#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
 ALLOWED_HOSTS.append(os.environ.get('SERVERNAME',default=''))
-
-ASGI_APPLICATION = "photographApi.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [('redis://:vGphoEr4tgofBk2idTg8EmnOlm3Kfxy0@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154')],
-        }
-    },
-}
 
 INSTALLED_APPS = [
     'daphne',
@@ -65,6 +51,16 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
 ]
+
+ASGI_APPLICATION = "photographApi.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [('redis://:vGphoEr4tgofBk2idTg8EmnOlm3Kfxy0@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154')],
+        }
+    },
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -215,3 +211,4 @@ CORS_ALLOWED_ORIGINS = [
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
