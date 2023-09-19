@@ -136,24 +136,27 @@ WSGI_APPLICATION = "photographApi.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME":"photograph-chat",
-#         "USERNAME": "db-9v8dmreatrb5",
-#         "PASSWORD": "WSEk0FjhqKcQPSR0ScFSCZ5o",
-#         "HOST": "up-pl-waw1-mysql-1.db.run-on-erla.com",
-#         "PORT": 11550,
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME":"db-ctke9l8cwlfx",
+        "USER": "db-ctke9l8cwlfx",
+        "PASSWORD": "jBUe87wrDJuPvAwMUmkwaamm",
+        "HOST": "up-pl-waw1-mysql-1.db.run-on-erla.com",
+        "PORT": 11550,
+    },
+    'OPTIONS': {
+                    'charset': 'utf8mb4',
+                    'use_unicode': True, },
+    
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
