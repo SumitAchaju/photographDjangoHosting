@@ -31,7 +31,7 @@ DEBUG = os.environ.get("DEBUG", default=False)
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 ALLOWED_HOSTS.append(os.environ.get("SERVERNAME", default=""))
-CSRF_TRUSTED_ORIGINS = ['https://web-340upwydqb0b.up-pl-waw1-1.apps.run-on-erla.com'] + ALLOWED_HOSTS
+CSRF_TRUSTED_ORIGINS =  [f"https://{os.environ.get('SERVERNAME')}"]
 
 INSTALLED_APPS = [
     "daphne",
