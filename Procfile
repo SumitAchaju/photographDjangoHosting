@@ -1,2 +1,1 @@
-build: pip install --upgrade pip
-web: daphne photographApi.asgi:application -b 0.0.0.0
+web: daphne photographApi.asgi:application -b 0.0.0.0 -p 80
