@@ -28,7 +28,6 @@ hyperlink==21.0.0
 idna==3.7
 incremental==22.10.0
 msgpack==1.0.8
-mysqlclient==2.2.4
 packaging==24.1
 pillow==10.3.0
 priority==2.0.0
