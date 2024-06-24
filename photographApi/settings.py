@@ -17,6 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 from datetime import timedelta
+import dj_database_url
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,12 +27,12 @@ from datetime import timedelta
 SECRET_KEY = os.environ.get("SECRET_KEY", default="your secret key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", default=False)
+DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
-ALLOWED_HOSTS.append(os.environ.get("SERVERNAME", default=""))
-CSRF_TRUSTED_ORIGINS =  [f"https://{os.environ.get('SERVERNAME')}"]
+ALLOWED_HOSTS.append(os.environ.get("RENDER_EXTERNAL_HOSTNAME", default=""))
+CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('RENDER_EXTERNAL_HOSTNAME')}"]
 
 INSTALLED_APPS = [
     "daphne",
@@ -41,13 +42,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "Account",
     "Follow",
     "More",
     "Post",
     "chat",
-
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
@@ -58,11 +57,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [
-                (
-                    "redis://:vGphoEr4tgofBk2idTg8EmnOlm3Kfxy0@redis-18154.c61.us-east-1-3.ec2.cloud.redislabs.com:18154"
-                )
-            ],
+            "hosts": [("redis://red-cpshu556l47c73e5rl2g:6379")],
         },
     },
 }
@@ -133,30 +128,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "photographApi.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME":"db-ctke9l8cwlfx",
-        "USER": "db-ctke9l8cwlfx",
-        "PASSWORD": "jBUe87wrDJuPvAwMUmkwaamm",
-        "HOST": "up-pl-waw1-mysql-1.db.run-on-erla.com",
-        "PORT": 11550,
-    },
-    'OPTIONS': {
-                    'charset': 'utf8mb4',
-                    'use_unicode': True, },
-    
+    "default": dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default="postgresql://postgres:pass@localhost:5432/photograph",
+        conn_max_age=600,
+    )
 }
 
 # Password validation
@@ -207,6 +184,7 @@ if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

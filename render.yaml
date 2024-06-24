@@ -1,0 +1,22 @@
+databases:
+  - name: dpg-cpshvd2j1k6c738ngbe0-a
+    plan: free
+    databaseName: photograph
+    user: sumit
+
+services:
+  - type: web
+    plan: free
+    name: photographApi
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn photographApi.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dpg-cpshvd2j1k6c738ngbe0-a
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
