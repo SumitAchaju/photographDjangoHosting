@@ -166,13 +166,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-STORAGES = {
-    # ...
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -180,7 +173,6 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static/"
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:
-    STATIC_URL = "staticfiles/"
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
