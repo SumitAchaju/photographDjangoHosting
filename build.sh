@@ -2,6 +2,8 @@
 # Exit on error
 set -o errexit
 
+python -m pip install --upgrade pip==24.1
+
 # Modify this line as needed for your package manager (pip, poetry, etc.)
 pip install -r requirements.txt
 
