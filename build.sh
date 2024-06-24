@@ -15,5 +15,5 @@ python manage.py migrate
 
 if [[ $CREATE_SUPERUSER ]];
 then
-  python photographApi/manage.py createsuperuser --no-input
+  python manage.py createsuperuser --no-input
 fi
