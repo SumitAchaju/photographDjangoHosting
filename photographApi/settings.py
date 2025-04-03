@@ -27,12 +27,12 @@ import dj_database_url
 SECRET_KEY = os.environ.get("SECRET_KEY", default="your secret key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "RENDER" not in os.environ
+DEBUG = "PRODUCTION" not in os.environ
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
-ALLOWED_HOSTS.append(os.environ.get("RENDER_EXTERNAL_HOSTNAME", default=""))
-CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('RENDER_EXTERNAL_HOSTNAME')}"]
+ALLOWED_HOSTS.append(os.environ.get("HOST_NAME", default=""))
+CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('HOST_NAME')}"]
 
 INSTALLED_APPS = [
     "daphne",
@@ -57,7 +57,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis://red-cpshu556l47c73e5rl2g:6379")],
+            "hosts": ["redis://red-cpshu556l47c73e5rl2g:6379"],
         },
     },
 }
@@ -131,7 +131,7 @@ WSGI_APPLICATION = "photographApi.wsgi.application"
 DATABASES = {
     "default": dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default="postgresql://postgres:pass@localhost:5432/photograph",
+        default=os.environ.get("DATABASE_URL", default="sqlite:///db.sqlite3"),
         conn_max_age=600,
     )
 }
