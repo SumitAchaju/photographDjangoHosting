@@ -31,7 +31,6 @@ msgpack==1.0.8
 packaging==24.1
 pillow==10.3.0
 priority==2.0.0
-psutil==6.0.0
 psycopg2-binary==2.9.9
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
