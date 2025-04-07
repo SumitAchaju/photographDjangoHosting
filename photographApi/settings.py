@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,15 +28,15 @@ import dj_database_url
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", default="your secret key")
+SECRET_KEY = os.getenv("SECRET_KEY", default="your secret key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "PRODUCTION" not in os.environ
+DEBUG = os.getenv("DEBUG", default="True") == "True"
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
-ALLOWED_HOSTS.append(os.environ.get("HOST_NAME", default=""))
-CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('HOST_NAME')}"]
+ALLOWED_HOSTS.append(os.getenv("HOST_NAME", default=""))
+CSRF_TRUSTED_ORIGINS = [f"https://{os.getenv('HOST_NAME')}"]
 
 INSTALLED_APPS = [
     "daphne",
@@ -131,7 +135,7 @@ WSGI_APPLICATION = "photographApi.wsgi.application"
 DATABASES = {
     "default": dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default=os.environ.get("DATABASE_URL", default="sqlite:///db.sqlite3"),
+        default=os.getenv("DATABASE_URL", default="sqlite:///db.sqlite3"),
         conn_max_age=600,
     )
 }
