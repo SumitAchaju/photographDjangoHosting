@@ -18,6 +18,7 @@ RUN python3 manage.py collectstatic --noinput
 # Build the final image
 FROM python:3.12.1-alpine
 
+WORKDIR /app
 
 RUN apk add --no-cache \
     libpq \
