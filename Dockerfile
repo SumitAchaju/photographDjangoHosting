@@ -1,5 +1,14 @@
 FROM python:3.12.1-alpine
 
+ARG DJANGO_SUPERUSER_USERNAME
+ARG DJANGO_SUPERUSER_PASSWORD
+ARG DJANGO_SUPERUSER_EMAIL
+
+ENV DJANGO_SUPERUSER_USERNAME=$DJANGO_SUPERUSER_USERNAME
+ENV DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
+ENV DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL
+
+
 
 WORKDIR /app
 
@@ -12,7 +21,9 @@ RUN \
 
 COPY . .
 
-RUN python3 manage.py makemigrations && \
-    python3 manage.py migrate && \
-    python3 manage.py collectstatic --noinput && \
-    python3 createsuperuser.py
+COPY entrypoint.sh entrypoint.sh
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+
