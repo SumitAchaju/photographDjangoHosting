@@ -9,7 +9,7 @@ RUN \
     apk add --virtual .build-deps gcc musl-dev postgresql-dev 
 
 RUN pip install --upgrade pip  && \
-    python3 -m pip install  --no-cache-dir --prefix=/install -r requirements.txt
+    python3 -m pip install  --no-cache-dir -r requirements.txt
 
 COPY . .
 
@@ -24,7 +24,7 @@ RUN apk add --no-cache \
     libjpeg \
     zlib
 
-COPY --from=builder /install /usr/local
+COPY --from=builder /usr/local /usr/local
 COPY --from=builder /app /app
 
 
