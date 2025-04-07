@@ -1,14 +1,4 @@
-FROM python:3.12.1-alpine
-
-ARG DJANGO_SUPERUSER_USERNAME
-ARG DJANGO_SUPERUSER_PASSWORD
-ARG DJANGO_SUPERUSER_EMAIL
-
-ENV DJANGO_SUPERUSER_USERNAME=$DJANGO_SUPERUSER_USERNAME
-ENV DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
-ENV DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL
-
-
+FROM python:3.12.1-alpine as builder
 
 WORKDIR /app
 
@@ -16,10 +6,25 @@ COPY requirements.txt .
 
 RUN \
     apk add postgresql-libs && \
-    apk add --virtual .build-deps gcc musl-dev postgresql-dev && \
-    python3 -m pip install -r requirements.txt 
+    apk add --virtual .build-deps gcc musl-dev postgresql-dev 
+
+RUN pip install --upgrade pip  && \
+    python3 -m pip install  --no-cache-dir --prefix=/install -r requirements.txt
 
 COPY . .
 
-RUN sh entrypoint.sh
+RUN python3 manage.py collectstatic --noinput
+
+# Build the final image
+FROM python:3.12.1-alpine
+
+
+RUN apk add --no-cache \
+    libpq \
+    libjpeg \
+    zlib
+
+COPY --from=builder /install /usr/local
+COPY --from=builder /app /app
+
 

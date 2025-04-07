@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,7 +132,7 @@ WSGI_APPLICATION = "photographApi.wsgi.application"
 DATABASES = {
     "default": dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default=os.getenv("DATABASE_URL", default="sqlite:///db.sqlite3"),
+        default=os.getenv("DATABASE_URL"),
         conn_max_age=600,
     )
 }
